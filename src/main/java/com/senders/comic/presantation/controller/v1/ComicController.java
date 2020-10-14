@@ -13,8 +13,9 @@ import reactor.core.publisher.Flux;
 public class ComicController {
     @Autowired
     private ComicService comicService;
+
     @GetMapping()
-    Flux<Comic> getComics(){
+    Flux<Comic> getComics() {
         return comicService.getLastComics();
     }
 }

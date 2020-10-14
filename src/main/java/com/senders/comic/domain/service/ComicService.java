@@ -9,17 +9,17 @@ import reactor.core.publisher.Flux;
 @Service
 public class ComicService {
     @Autowired
-    private   XKCDComicService xkcdComicService;
+    private XKCDComicService xkcdComicService;
     @Autowired
     private FeedBurnerService feedBurnerService;
-    private Integer numberOfComicsPerRequest;
+    private final Integer numberOfComicsPerRequest;
 
-    public ComicService( @Value("${url.element.number}") Integer numberOfComicsPerRequest) {
+    public ComicService(@Value("${url.element.number}") Integer numberOfComicsPerRequest) {
         this.numberOfComicsPerRequest = numberOfComicsPerRequest;
     }
 
     public Flux<Comic> getLastComics() {
-        return Flux.merge(xkcdComicService.getTopComics(numberOfComicsPerRequest),feedBurnerService.getTopComics(numberOfComicsPerRequest))
+        return Flux.merge(xkcdComicService.getTopComics(numberOfComicsPerRequest), feedBurnerService.getTopComics(numberOfComicsPerRequest))
                 .sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
 
     }

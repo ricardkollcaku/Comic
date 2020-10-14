@@ -1,7 +1,7 @@
 package com.senders.comic.domain.service;
 
-import com.senders.comic.data.model.Comic;
 import com.senders.comic.data.dto.XKCDComicDTO;
+import com.senders.comic.data.model.Comic;
 import com.senders.comic.domain.util.ObjectMapper;
 import com.senders.comic.domain.util.Utils;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,11 +13,11 @@ import reactor.core.publisher.Mono;
 @Service
 public class XKCDComicService implements IComicService {
     @Value("${xkcd.json.url.top-comic}")
-    private   String topComicUrl;
+    private String topComicUrl;
     @Value("${url.structure.element.key}")
-    private   String comicPositionKey;
+    private String comicPositionKey;
     @Value("${xkcd.url.structure}")
-    private   String urlStructure;
+    private String urlStructure;
     @Value("${xkcd.json.url.structure}")
     private String jsonUrlStructure;
 
@@ -33,11 +33,11 @@ public class XKCDComicService implements IComicService {
     }
 
     private Mono<Comic> getComic(Integer integer, String jsonUrlStructure) {
-        return WebClient.create(Utils.parseUrl(integer, jsonUrlStructure,comicPositionKey))
+        return WebClient.create(Utils.parseUrl(integer, jsonUrlStructure, comicPositionKey))
                 .get()
                 .exchange()
                 .flatMap(clientResponse -> clientResponse.bodyToMono(XKCDComicDTO.class))
-                .map(xkcdComicDTO -> ObjectMapper.map(xkcdComicDTO, Utils.parseUrl(integer, urlStructure,comicPositionKey)));
+                .map(xkcdComicDTO -> ObjectMapper.map(xkcdComicDTO, Utils.parseUrl(integer, urlStructure, comicPositionKey)));
     }
 
 

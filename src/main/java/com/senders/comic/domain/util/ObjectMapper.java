@@ -1,8 +1,8 @@
 package com.senders.comic.domain.util;
 
 import com.rometools.rome.feed.synd.SyndEntry;
-import com.senders.comic.data.model.Comic;
 import com.senders.comic.data.dto.XKCDComicDTO;
+import com.senders.comic.data.model.Comic;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -20,7 +20,7 @@ public class ObjectMapper {
         return comic;
     }
 
-    public static Comic map (SyndEntry syndEntry){
+    public static Comic map(SyndEntry syndEntry) {
         Comic comic = new Comic();
         comic.setTitle(syndEntry.getTitle());
         comic.setDescription(syndEntry.getDescription().getValue());
@@ -38,6 +38,6 @@ public class ObjectMapper {
     }
 
     public static Date map(LocalDate dateToConvert) {
-        return Date.from(dateToConvert.atStartOfDay( ZoneId.systemDefault()).toInstant());
+        return Date.from(dateToConvert.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 }
