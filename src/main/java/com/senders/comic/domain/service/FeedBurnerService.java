@@ -9,6 +9,6 @@ import reactor.core.publisher.Mono;
 public class FeedBurnerService implements IComicService {
     @Override
     public Flux<Comic> getTopComics(int elementPerRequest) {
-        return Flux.just(new Comic());
+        return Flux.empty();
     }
 }

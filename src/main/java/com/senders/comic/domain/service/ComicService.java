@@ -19,6 +19,8 @@ public class ComicService {
     }
 
     public Flux<Comic> getLastComics() {
-        return Flux.just(new Comic());
+        return Flux.merge(xkcdComicService.getTopComics(numberOfComicsPerRequest),feedBurnerService.getTopComics(numberOfComicsPerRequest))
+                .sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+
     }
 }
