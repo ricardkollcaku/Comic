@@ -48,6 +48,7 @@ public class TestComicService {
                     Assertions.assertThat(e.getTitle().equals(getTestComic(2).getTitle()));
                 }).verifyComplete();
     }
+
     @Test
     public void testSortTopComics(){
         Comic comic1 = getTestComic(1);
@@ -68,6 +69,8 @@ public class TestComicService {
                     Assertions.assertThat(e.getTitle().equals(comic1.getTitle()));
                 }).verifyComplete();
     }
+
+
 
 
     private Comic getTestComic(int a){
